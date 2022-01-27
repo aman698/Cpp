@@ -122,6 +122,43 @@ int main(){
     return 0;
 }
 
+// No of Balanced binary trees at height h
+#include<bits/stdc++.h>
+using namespace std;
+
+// h >= 0   T.C = O(2^k)  for more value n its code valid
+int balancedBTs_2(int h){
+    if(h <= 1)
+    return 1;
+
+    int mod = (int)(pow(10, 9)) + 7;
+    int x = balancedBTs_2(h - 1);
+    int y = balancedBTs_2(h - 2);
+
+    int temp1 = (int)(((long)(x)*x)%mod);
+    int temp2 = (int)((2*(long)(x)*y)%mod);
+    int ans = (temp1 + temp2)%mod;
+    return ans;
+}
+//simple recursive sol
+int balancedBTs(int h){
+    if(h <= 1){
+        return 1;
+    }
+    int x = balancedBTs(h-1);
+    int y = balancedBTs(h-2);
+
+    int ans = x*x + 2*x*y;
+    return ans;
+}
+
+int main(){
+    int h;
+    cin>>h;
+    cout<<balancedBTs(h)<<endl;
+    cout<<balancedBTs_2(h)<<endl;
+}
+
 
 
 
